@@ -36,7 +36,7 @@ const deleteUser = async (req, res) => {
     res.json(status)
 }
 const updateUser = async (req, res) => {
-    const userId = req.params.id
+    const userId = req.params._id
     const updatedUser = req.body
     const status = await usersDao.updateUser(
         userId,
@@ -94,9 +94,10 @@ const profileController = (app) => {
     app.post('/api/users/credentials', findUserByCredentials)
     app.post('/api/users', createUser)
     app.delete('/api/users/:id', deleteUser)
+    */
     app.put('/api/users/:id', updateUser)
 
-     */
+
 }
 
 export default profileController;
