@@ -36,7 +36,7 @@ const deleteUser = async (req, res) => {
     res.json(status)
 }
 const updateUser = async (req, res) => {
-    const userId = req.params._id
+    const userId = req.params.id
     const updatedUser = req.body
     const status = await usersDao.updateUser(
         userId,
@@ -87,9 +87,9 @@ const profileController = (app) => {
 
   //  app.post('/api/signout', signout)
     app.post('/api/profile', profile)
-/*
+
     app.get('/api/users', findAllUsers)
-    app.get('/api/users/:id', findUserById)
+/*    app.get('/api/users/:id', findUserById)
     app.get('/api/users/email/:email', findUserByEmail)
     app.post('/api/users/credentials', findUserByCredentials)
     app.post('/api/users', createUser)
