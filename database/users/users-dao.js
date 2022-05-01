@@ -7,7 +7,6 @@ export const findUserById = (id) => {
     return usersModel.findById(id)
 }
 export const findUserByUsername = (username) => {
-    // return usersModel.findOne({email: email})
     return usersModel.findOne({username})
 }
 export const findUserByCredentials = (username, password) => {
