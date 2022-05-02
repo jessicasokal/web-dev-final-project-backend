@@ -83,19 +83,14 @@ const signout = (req, res) => {
 
 const profileController = (app) => {
 
-    app.post('/api/signup', signup)
-    app.post('/api/signin', signin)
+    app.post('/api/register', signup)
+    app.post('/api/login', signin)
 
-    app.post('/api/signout', signout)
+    app.post('/api/logout', signout)
     app.post('/api/profile', profile)
 
     app.get('/api/users', findAllUsers)
     app.get('/api/users/:id', findUserById)
-/*
-    app.get('/api/users/email/:email', findUserByEmail)
-    app.post('/api/users/credentials', findUserByCredentials)
-    app.post('/api/users', createUser)
-    */
 
     app.delete('/api/users/:id', deleteUser)
     app.put('/api/users/:id', updateUser)
