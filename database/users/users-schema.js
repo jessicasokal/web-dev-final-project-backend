@@ -10,6 +10,6 @@ const usersSchema = mongoose.Schema({
     password: {type: String, required: true},
     likedMovies: {type: Array, default: []},
     comments: {type: Array}
-}, {collection: "users_final_project"})
+}, {collection: "users"})
 
 export default usersSchema;
