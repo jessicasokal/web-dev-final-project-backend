@@ -7,8 +7,7 @@ export const findMovieById = (id) => {
     return moviesModel.findById(id)
 }
 export const findMovieByImdbID = (imdbID) => {
-    // return usersModel.findOne({email: email})
-    return moviesModel.findOne({imdbID: imdbID})
+    return moviesModel.findOne({imdbID})
 }
 
 export const createMovie = (movie) => {

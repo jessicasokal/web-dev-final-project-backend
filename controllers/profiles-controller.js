@@ -14,6 +14,40 @@ const findUserByUsername = async (req, res) => {
     const user = await usersDao.findUserByUsername(username)
     res.json(user)
 }
+
+
+
+
+
+const findFollowers = async (req, res) => {
+    const id = req.params.id
+    const user = await usersDao.findUserById(id)
+    res.json(user.followers)
+}
+
+const findFollowing = async (req, res) => {
+    const id = req.params.id
+    const user = await usersDao.findUserById(id)
+    res.json(user.following)
+}
+
+const findEmail = async (req, res) => {
+    const id = req.params.id
+    const user = await usersDao.findUserById(id)
+    res.json(user.email)
+}
+
+const findPassword = async (req, res) => {
+    const id = req.params.id
+    const user = await usersDao.findUserById(id)
+    res.json(user.password)
+}
+
+
+
+
+
+
 const findUserByCredentials = async (req, res) => {
     const crendentials = req.body
     const username = crendentials.username
@@ -89,8 +123,15 @@ const profileController = (app) => {
     app.post('/api/logout', signout)
     app.post('/api/profile', profile)
 
+    app.get('/api/users/:id/followers', findFollowers)
+    app.get('/api/users/:id/following', findFollowing)
+    app.get('/api/users/:id/email', findEmail)
+    app.get('/api/users/:id/password', findPassword)
     app.get('/api/users', findAllUsers)
     app.get('/api/users/:id', findUserById)
+
+
+
 
     app.delete('/api/users/:id', deleteUser)
     app.put('/api/users/:id', updateUser)

@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 const moviesSchema = mongoose.Schema({
     imdbID: String,
-    comments: Array,
-    likes: Number
-}, {collection: "movies_final_project"})
+    comments: {type: Array, default: []},
+    likes: {type: Number, default: 0}
+}, {collection: "movies5"})
 
 export default moviesSchema;

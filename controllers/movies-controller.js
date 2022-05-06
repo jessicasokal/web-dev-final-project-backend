@@ -15,10 +15,25 @@ const findMovieByImdbID = async (req, res) => {
     res.json(movie)
 }
 
+const findMovieLikes = async (req, res) => {
+    const id = req.params.imdbID
+    const movie = await moviesDao.findMovieByImdbID(id)
+    console.log(`MOVIE LIKES: ${movie}`)
+    res.json(movie.likes)
+}
+
 const createMovie = async (req, res) => {
     const newMovie = req.body
-    const insertedMovie = await moviesDao.createMovie(newMovie)
-    res.json(insertedMovie)
+    console.log(`REQUEST BODY: ${JSON.stringify(newMovie)}`)
+    const existingMovie = await moviesDao.findMovieByImdbID(newMovie.imdbID)
+    if (existingMovie) {
+        console.log(`EXISTING MOVIE: ${JSON.stringify(existingMovie)}`)
+        res.json(existingMovie)
+    } else {
+        const insertedMovie = await moviesDao.createMovie(newMovie)
+        console.log(`INSERTED MOVIE: ${JSON.stringify(insertedMovie)}`)
+        res.json(insertedMovie)
+    }
 }
 const deleteMovie = async (req, res) => {
     const movieID = req.params.id
@@ -38,6 +53,7 @@ const updateMovie = async (req, res) => {
 const movieController = (app) => {
     app.get('/api/movies', findAllMovies)
     app.get('/api/movies/:imdbID', findMovieByImdbID)
+    app.get('/api/movies/:imdbID/likes', findMovieLikes)
 
     app.post('/api/movies', createMovie)
     app.delete('/api/movies/:id', deleteMovie)
