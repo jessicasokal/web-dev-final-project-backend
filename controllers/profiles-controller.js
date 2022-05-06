@@ -2,6 +2,7 @@ import * as usersDao from "../database/users/users-dao.js";
 
 const findAllUsers = async (req, res) => {
     const users = await usersDao.findAllUsers()
+    console.log(`ALL USERS: ${users}`)
     res.json(users)
 }
 const findUserById = async (req, res) => {
@@ -47,7 +48,17 @@ const findPassword = async (req, res) => {
     res.json(user.password)
 }
 
+const findComments = async (req, res) => {
+    const id = req.params.id
+    const user = await usersDao.findUserById(id)
+    res.json(user.comments)
+}
 
+const findLikedMovies = async (req, res) => {
+    const id = req.params.id
+    const user = await usersDao.findUserById(id)
+    res.json(user.likedMovies)
+}
 
 
 
@@ -129,6 +140,8 @@ const profileController = (app) => {
 
     app.get('/api/users/:id/followers', findFollowers)
     app.get('/api/users/:id/following', findFollowing)
+    app.get('/api/users/:id/comments', findComments)
+    app.get('/api/users/:id/likedMovies', findLikedMovies)
     app.get('/api/users/:id/liked', findLiked)
     app.get('/api/users/:id/email', findEmail)
     app.get('/api/users/:id/password', findPassword)

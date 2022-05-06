@@ -22,6 +22,13 @@ const findMovieLikes = async (req, res) => {
     res.json(movie.likes)
 }
 
+const findMovieComments = async (req, res) => {
+    const id = req.params.imdbID
+    const movie = await moviesDao.findMovieByImdbID(id)
+    console.log(`MOVIE COMMENTS: ${movie}`)
+    res.json(movie.comments)
+}
+
 const createMovie = async (req, res) => {
     const newMovie = req.body
     console.log(`REQUEST BODY: ${JSON.stringify(newMovie)}`)
@@ -54,6 +61,7 @@ const movieController = (app) => {
     app.get('/api/movies', findAllMovies)
     app.get('/api/movies/:imdbID', findMovieByImdbID)
     app.get('/api/movies/:imdbID/likes', findMovieLikes)
+    app.get('/api/movies/:imdbID/comments', findMovieComments)
 
     app.post('/api/movies', createMovie)
     app.delete('/api/movies/:id', deleteMovie)
