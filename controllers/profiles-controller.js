@@ -17,8 +17,6 @@ const findUserByUsername = async (req, res) => {
 
 
 
-
-
 const findFollowers = async (req, res) => {
     const id = req.params.id
     const user = await usersDao.findUserById(id)
@@ -29,6 +27,12 @@ const findFollowing = async (req, res) => {
     const id = req.params.id
     const user = await usersDao.findUserById(id)
     res.json(user.following)
+}
+
+const findLiked = async (req, res) => {
+    const id = req.params.id
+    const user = await usersDao.findUserById(id)
+    res.json(user.likedMovies)
 }
 
 const findEmail = async (req, res) => {
@@ -125,12 +129,11 @@ const profileController = (app) => {
 
     app.get('/api/users/:id/followers', findFollowers)
     app.get('/api/users/:id/following', findFollowing)
+    app.get('/api/users/:id/liked', findLiked)
     app.get('/api/users/:id/email', findEmail)
     app.get('/api/users/:id/password', findPassword)
     app.get('/api/users', findAllUsers)
     app.get('/api/users/:id', findUserById)
-
-
 
 
     app.delete('/api/users/:id', deleteUser)
